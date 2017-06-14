@@ -1498,6 +1498,10 @@ def _write_file_routes(iface, data, folder, pattern):
     '''
     Writes a file to disk
     '''
+    # replace dots in the actual filename, f.e. vlan interfaces have those
+    # and files with extensions are skipped under f.e. ubuntu 16.04
+    iface = iface.replace('.', '_')
+
     filename = os.path.join(folder, pattern.format(iface))
     if not os.path.exists(folder):
         msg = '{0} cannot be written. {1} does not exist'
